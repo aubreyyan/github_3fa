@@ -30,7 +30,7 @@ function getNRandomRepos(repos, n) {
  * ref: https://docs.greptile.com/quickstart
  */
 function getRepoId(branch, repoFullName) {
-    return `github%3A${branch}%3A${repoFullName.replace("/", "%2F")}`
+    return `github%3A${branch}%3A${repoFullName.replace("/", "%2F")}`;
 }
 
 async function repoHasBeenIndexed(branch, repoFullName) {
@@ -84,6 +84,7 @@ function App() {
             }
         }).then(function (resp) {
             setFunFact(resp.data.message);
+            allRepos.splice(allRepos.indexOf(repo), 1)
             setRepoOptions(shuffleArray(([repo].concat(getNRandomRepos(allRepos, 3)))));
         }).catch(function (err) {
             console.log(err);
@@ -115,7 +116,7 @@ function App() {
             let randomRepo = repos.length > 0 ? repos[Math.floor(Math.random() * repos.length)] : null;
 // You can use this to hardcode the repo that is "randomly" selected, because I don't entirely have the logic to detect if a repo has been indexed completely working.
             randomRepo = {
-                "full_name": "aubreyyan/course_collect",
+                "full_name": "aubreyyan/openapi-converter-maven-plugin",
                 "default_branch": "master"
             }
             setSolutionRepo(randomRepo);
